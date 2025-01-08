@@ -1,6 +1,5 @@
 import datetime
 import os.path
-
 from fastapi import FastAPI, UploadFile, HTTPException
 from fastapi.responses import JSONResponse
 from fastapi.middleware.cors import CORSMiddleware
@@ -229,3 +228,4 @@ def validate_file_type(file: UploadFile):
 
 
 # Run the app using: uvicorn main:app --reload --log-level debug
+# make sure to delete refresh_token.txt if you log in
