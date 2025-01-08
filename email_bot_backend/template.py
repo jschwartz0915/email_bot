@@ -1,5 +1,8 @@
 
 
+def email_subject(property_name):
+    subject = f"Reaching out about {property_name}"
+    return subject
 
 def email_template(name, property_name, property_address=None):
     first_name = get_first_name(name)

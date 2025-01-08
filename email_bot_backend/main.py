@@ -19,7 +19,7 @@ logger.setLevel(logging.DEBUG)
 
 
 from email_functions import search_emails, send_email, signed_in_user
-from template import email_template
+from template import email_template, email_subject
 
 app = FastAPI()
 
@@ -116,7 +116,7 @@ async def send_emails(file: UploadFile):
                 if pd.isna(email_address) or not email_address:
                     continue  # Skip if email is blank or NaN
 
-                subject = f"Reaching out about {property_name}"
+                subject = email_subject(property_name)
 
                 body = email_template(name, property_name)
 

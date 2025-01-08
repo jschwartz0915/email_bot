@@ -9,9 +9,13 @@ The core functionality of the website has 3 pages:
 ## Template and Configurations
 
 ### Email Template
-The email template is not currently configurable. To edit the template, you can go to template.py. The template for the email is currently defined as follows in template.py
+The email template is not currently configurable from the frontend. 
+
+To edit the subject or template, you can go to template.py. The template for the email is currently defined as follows in template.py
 
 ```python
+    subject = f"Reaching out about {property_name}"
+
     template = (f"Hi {first_name},"
                 f"Hope you’re doing well."
                 f"It’s Eric Schwartz from BASE Realty Group."
