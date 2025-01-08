@@ -1,50 +1,35 @@
-# React + TypeScript + Vite
+# Email Bot
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This bot is a small web application intended to allow you to send emails based on a preconfigured template. 
+The core functionality of the website has 3 pages:
+- Homepage - Displays the signed in user and some basic stats
+- Upload Page - Allows user to upload a spreadsheet and send emails for each row in the spreadsheet. (Specifics of format for spreadsheet to be discussed in depth below)
+- Responses Page - Allows user to see whether or not they have received an email in response for each email they have sent out
 
-Currently, two official plugins are available:
+## Template and Configurations
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+### Email Template
+The email template is not currently configurable. To edit the template, you can go to template.py. The template for the email is currently defined as follows in template.py
 
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
-
-- Configure the top-level `parserOptions` property like this:
-
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+```python
+    template = (f"Hi {first_name},"
+                f"Hope you’re doing well."
+                f"It’s Eric Schwartz from BASE Realty Group."
+                f"A client of mine came across your asset, {property_name}."
+                f"They asked me to get in touch with you to see if you would entertain an offer on it."
+                f"I'm happy to discuss further at your earliest convenience."
+    )
 ```
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+### Upload Spreadsheet Format
+The current format for an uploaded spreadsheet is as follows:
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
+![img.png](spreadsheet_example.png)
 
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
-```
+The order of the columns does NOT matter but the following columns are required
+and if they are omitted will cause an error:
+1. Property Name (row cannot be blank)
+2. At least 1 column of "Name" (row cannot be blank)
+3. At least 1 column of "Email" (row cannot be blank)
+4. Property Address (you CAN leave the row blank but the column must exist)
+
